@@ -1,0 +1,125 @@
+/* Universal */
+body {
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+}
+
+/*  GRID   */
+.grid {
+  display: grid;
+  grid-template: auto 1fr auto / minmax(150px, 20%) 1fr 20%;
+  /* grid-template: auto 1fr auto / minmax(150px, 20%) minmax(150px, 60%) minmax(150px, 20%); */
+  grid-column-gap: 10px;
+  height: 100vh;
+}
+
+header {
+  grid-column: 1 / 4;
+  display: grid;
+  margin: 10px;
+  grid-template-columns: repeat(4, 25%);
+  place-items: center;
+  background-color: silver;
+}
+  .site-title {
+    grid-column: 2 / span 2;
+    margin: 0;
+  }
+  .site-slogan {
+    grid-column: 2 / span 2;
+    margin: 0;
+  }
+  .newBtn {
+    grid-column: 4 / auto;
+    grid-row: 1 / span 2;
+  }
+.newChecklist {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid;
+  border-radius: 25px;
+  background-color: silver;
+  box-shadow: 5px 10px 18px black;
+}
+  .showGrid {
+    display: grid;
+    grid-template: repeat(4, 25%) / repeat(4, 25%);
+    place-items: center stretch;
+    padding: 40px;
+  }
+  .checkList-input {
+    grid-column: 1 / 4;
+    grid-row: 2 / 2;
+    width: 110%;
+  }
+  .checkListbtn {
+    grid-column: 4 / 5;
+    grid-row: 2 / 2
+  }
+
+.left-sidebar {
+  grid-column: 1 / 2;
+  background-color: silver;
+  margin-left: 10px;
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto 1fr 50px;
+}
+  .left-sidebar-title {
+    grid-row: 1 / 1;
+    padding: 0 2rem 0 2rem;
+  }
+  .check-list {
+    text-align: left;
+  }
+  .left-sidebar-btmPanel {
+    grid-row: 3 / 3;
+    display: flex;
+    place-items: center;
+  }
+    .left-sidebar-trash {
+    /*  grid-row: 3 / 3; */
+    }
+
+.main {
+  grid column: 2 / 3;
+  background-color: silver;
+}
+
+.right-sidebar {
+  grid-column: 3 / 4;
+  background-color: silver;
+  margin-right: 10px;
+  display: grid;
+  grid-template-rows: auto 1fr 50px;
+}
+  .right-sidebar-title {
+    grid-row: 1 / 1;
+    padding: 0 2rem 0 2rem;
+    text-align: center;
+  }
+
+footer {
+  grid-column: 1 / 4;
+  background-color: silver;
+  margin-top: 10px;
+}
+  .cp {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 10px;
+  }
+
+
+/* Universal Again */
+.show {
+  display: block;
+}
