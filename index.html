@@ -17,19 +17,21 @@
     <h1 class="site-title">CheckList</h1>
     <h3 class="site-slogan">Time to get organised!</h4>
     <div class="newBtn">
-      <button onclick="newChecklist()"><i class="fas fa-plus-circle fa-3x"></i></button>
+      <button onclick="newCheckList()"><i class="fas fa-plus-circle fa-3x"></i></button>
     </div>
   </header>
-  <div id="newChecklistbox" class="newChecklist">
-    <input class="checkList-input" type="text" placeholder="What's the new check list going to be called?">
-    <button onclick=""><i class="fas fa-check-circle fa-2x"></i></button>
+  <div id="newCheckListBox" class="newChecklist">
+    <div class="showGrid-item">
+      <input class="checkList-input" type="text" placeholder="What's the new check list going to be called?">
+      <button onclick="newCheckListItem()"><i class="fas fa-check-circle fa-2x"></i></button>
+    </div>
   </div>
   <div class="left-sidebar">
     <div class="left-sidebar-title">
-      <h3>Check List Pane</h3>
+      <h3>Check List Panel</h3>
     </div>
-    <div class="check-list">
-      <ul>
+    <div class="checkList">
+      <ul id="unlistedCheckList">
       </ul>
     </div>
     <div class="left-sidebar-btmPanel">
@@ -39,11 +41,13 @@
     </div>
   </div>
   <div class="main">
-
+    <div>
+      <h1>content</h1>
+    </div>
   </div>
   <div class="right-sidebar">
     <div class="right-sidebar-title">
-      <h3>Edit Pane</h3>
+      <h3>Edit Panel</h3>
     </div>
   </div>
   <footer>
