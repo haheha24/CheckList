@@ -22,7 +22,7 @@
   </header>
   <div id="newCheckListBox" class="newChecklist">
     <div class="showGrid-item">
-      <input class="checkList-input" type="text" placeholder="What's the new check list going to be called?">
+      <input id="checkListTxtBoxID" class="checkListTxtBox" type="text" placeholder="What's the new check list going to be called?">
       <button onclick="newCheckListItem()"><i class="fas fa-check-circle fa-2x"></i></button>
     </div>
   </div>
@@ -31,7 +31,7 @@
       <h3>Check List Panel</h3>
     </div>
     <div class="checkList">
-      <ul id="unlistedCheckList">
+      <ul id="checkListUl">
       </ul>
     </div>
     <div class="left-sidebar-btmPanel">
@@ -41,8 +41,8 @@
     </div>
   </div>
   <div class="main">
-    <div>
-      <h1>content</h1>
+    <div id="test">
+      <h1 id="checkListTitle">content</h1>
     </div>
   </div>
   <div class="right-sidebar">
