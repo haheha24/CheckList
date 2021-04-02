@@ -11,8 +11,7 @@
   <title>Check List</title>
   <script src="index.js"></script>
 </head>
-<body>
-<div class="grid">
+<body class="grid">
   <header>
     <h1 class="site-title">CheckList</h1>
     <h3 class="site-slogan">Time to get organised!</h4>
@@ -20,12 +19,15 @@
       <button onclick="newCheckList()"><i class="fas fa-plus-circle fa-3x"></i></button>
     </div>
   </header>
-  <div id="newCheckListBox" class="newChecklist">
-    <div class="showGrid-item">
-      <input id="checkListTxtBoxID" class="checkListTxtBox" type="text" placeholder="What's the new check list going to be called?">
-      <button onclick="newCheckListItem()"><i class="fas fa-check-circle fa-2x"></i></button>
-    </div>
-  </div>
+  <section id="newCheckListBox" class="newChecklist">
+      <div class="showGrid-Input">
+        <p class="boxContainer">
+          Enter the name of your new CheckList:
+          <input id="checkListTxtBoxID" class="checkListTxtBox" type="text">
+        </p>
+        <button onclick="newCheckListItem()" class="checkListbtn"><i class="fas fa-plus-circle fa-2x"></i></button>
+      </div>
+  </section>
   <div class="left-sidebar">
     <div class="left-sidebar-title">
       <h3>Check List Panel</h3>
@@ -40,11 +42,10 @@
       </div>
     </div>
   </div>
-  <div class="main">
-    <div id="test">
-      <h1 id="checkListTitle">content</h1>
-    </div>
-  </div>
+  <main id="main">
+    <h1 id="checkListTitle">Dynamic Title use JS</h1>
+    <article id="editList" contenteditable></article>
+  </main>
   <div class="right-sidebar">
     <div class="right-sidebar-title">
       <h3>Edit Panel</h3>
@@ -55,6 +56,5 @@
       <p class="cp">Copyright 2021 theCreativeAge All Rights Reserved.</p>
     </div>
   </footer>
-</div>
 </body>
 </html>
