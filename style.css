@@ -12,13 +12,14 @@ font-family: sans-serif;
 .grid {
   display: grid;
   grid-template: auto 1fr auto / minmax(150px, 20%) 1fr 20%;
-  grid-column-gap: 10px;
+  grid-column-gap: 5px;
+  height: 100vh;
 }
 
 header {
   grid-column: 1 / 4;
   display: grid;
-  margin: 10px;
+  margin: 5px;
   grid-template-columns: repeat(5, 1fr);
   place-items: center;
   background-color: silver;
@@ -51,17 +52,17 @@ header {
 }
   .showGrid {   
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1fr;
     padding: 40px;
   }
   .showGrid-Input {     /* improve flex layout */
     grid-row: 1 / 1;
     display: flex;
     justify-content: space-evenly;
-    
+    flex-wrap: wrap;
   }
     .checkListTxtBox {
-      width: 100%;
+      width: 75%;
       padding: 4px;
       height: 1.5em;
     }
@@ -90,8 +91,16 @@ header {
   }
   .checkLi {
     list-style-type: none;
-    margin-left: -30px;
-    background-color: rgba(0, 200, 0, 0.4);
+    margin-left: -10px;
+    margin-right: 40px;
+    font-size: 1.2em;
+    background-color: hsl(0, 0%, 60%);
+    padding: 5px 2px 5px 2px;
+    display: block;
+  }
+  .currentList, .checkLi:hover {
+    background-color: hsl(0, 0%, 100%);
+    cursor: pointer;
   }
   .left-sidebar-btmPanel {
     grid-row: 3 / 3;
