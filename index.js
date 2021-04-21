@@ -37,11 +37,13 @@ function active() {
 
 // New Checklist Button
 function newCheckList() {
-  document.getElementById("newCheckListBox").classList.toggle("showGrid");
-  // Add an event listener to hide newChecklistbox when mouse is clicked
-  // outside of the box.
+  let newCheckListBox = document.getElementById("newCheckListBox");
+  let checkText = document.getElementById("checkListTxtBoxID");
+  checkText.value = "";
+  newCheckListBox.classList.toggle("showGrid");
 }
 
+//Function to add new check lists
 function newCheckListItem() {
   //set up the conditions of what the check list name can be
   let checkListName = document.getElementById("checkListTxtBoxID").value;
@@ -63,7 +65,7 @@ function newCheckListItem() {
     window.alert(
       "There is already a list with that name. Please choose another."
     );
-  } else {
+  } /* else if (document.querySelector(".showGrid")) {} */ else {
     checkListArray.push(checkListName);
     checkUl.appendChild(checkLi);
     checkLi.classList.add("checkLi");
@@ -99,5 +101,12 @@ function newCheckListItem() {
     }
     active();
     localS();
+  }
+}
+
+//function to delete check lists and its localStorage
+function deleteCheckList() {
+  let query = document.querySelector(".currentList");
+  if (query) {
   }
 }
