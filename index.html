@@ -19,7 +19,9 @@
     <h1 class="site-title">CheckList</h1>
     <h3 class="site-slogan">Time to get organised!</h4>
       <div class="newBtn">
-        <button onclick="newCheckList()"><i class="fas fa-plus-circle fa-3x"></i></button>
+        <button onclick="newCheckList()">Create</button>
+        <button onclick="saveContent()">Save</button>
+        <button onclick="deleteCheckList()">Delete</button>
       </div>
   </header>
   <section id="newCheckListBox" class="newChecklist">
@@ -38,14 +40,12 @@
       </ul>
     </div>
     <div class="left-sidebar-btmPanel">
-      <div class="left-sidebar-trash">
-        <button onclick="deleteCheckList()"><i class="fas fa-trash fa-2x"></i></button>
-      </div>
+      <div class="left-sidebar-trash"></div>
     </div>
   </div>
   <main id="main">
     <h2 id="checkListTitle"></h2>
-    <article id="editList" contenteditable></article>
+    <article id="editList"></article>
   </main>
   <div class="right-sidebar">
     <div class="right-sidebar-title">
