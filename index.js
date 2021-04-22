@@ -27,6 +27,20 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
     let title = document.getElementById("checkListTitle");
     title.innerText = oldStoredCurrent;
 
+    //Apply contentEditable and editList-style class to #editList element
+    let oldStoredContent = localStorage.getItem("content");
+    if (oldStoredContent !== null) {
+
+      /* must figure out the saved content and only show the relevent content with the right item.
+      must create a localStorage key called "content".
+      must create a save function that will save the content of the relevant li item and apply it to the "content" key as a value */
+
+      let content = document.getElementById("editList");
+      content.setAttribute("contentEditable", "true");
+      content.classList.add("editList-style");
+    }
+    
+
     //Call active() function and the nested dynamicTitle() function
     active();
   } else if (localStorage.getItem("localArray") == null) {
@@ -34,20 +48,25 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
   }
 });
 
-//Call active() function to highlight the currently clicked list item
+//Call active() function to highlight the currently clicked list item and make the content editable by the user
 function active() {
   let checkUl = document.getElementById("checkListUl");
   let checkHighlight = checkUl.getElementsByClassName("checkLi");
   for (let i = 0; i < checkHighlight.length; i++) {
     checkHighlight[i].addEventListener("click", function () {
       let current = document.getElementsByClassName("currentList");
+      let content = document.getElementById("editList");
       if (current.length > 0) {
         current[0].className = current[0].className.replace(" currentList", "");
+        content.setAttribute("contentEditable", "false");
+        content.classList.remove("editList-style");
       }
       this.className += " currentList";
-      let newStoredCurrent = current[0].innerText;
+      content.setAttribute("contentEditable", "true");
+      content.classList.add("editList-style");
 
       //store newStoredCurrent to localStorage key "currentItem"
+      let newStoredCurrent = current[0].innerText;
       localStorage.setItem("currentItem", newStoredCurrent);
     });
   }
@@ -64,6 +83,13 @@ function active() {
   }
   //activate the dynamic function
   dynamicTitle();
+
+  /*   //Dynamically change #editList with contentEditable as active() changes .currentList from li items
+  function contentEdit() {
+    let edit = document.getElementById("editList");
+    edit.addEventListener("");
+  }
+  contentEdit(); */
 }
 
 // New Checklist Button
@@ -80,13 +106,14 @@ function newCheckListItem() {
   let checkListName = document.getElementById("checkListTxtBoxID").value;
   let checkRegExp = /\s/;
   let conditionalOne =
-    checkListName === "" || checkRegExp.exec(checkListName) !== null; // Create an regexp array that covers whitespace and no repeating checkListNames
+    checkListName === "" || checkRegExp.exec(checkListName) !== null; // Create an regexp that covers whitespace and no repeating checkListNames
   let conditionalTwo = checkListArray.includes(checkListName);
 
   //DOM requirements
   let checkUl = document.getElementById("checkListUl");
   let checkLi = document.createElement("li");
   let checkTitle = document.getElementById("checkListTitle");
+  let checkEdit = document.getElementById("editList");
 
   //begin the actual function
   if (conditionalOne) {
@@ -103,6 +130,8 @@ function newCheckListItem() {
     checkLi.classList.add("checkLi");
     checkLi.innerText = checkListName;
     checkTitle.innerText = checkListName;
+    checkEdit.classList.add("editList-style");
+    checkEdit.setAttribute("contentEditable", "true");
 
     //"show" the currently highlighted checkList
     if (checkListArray.length > 1) {
@@ -113,8 +142,6 @@ function newCheckListItem() {
         checkHighlight[i].classList.remove("currentList");
       }
       localStorage.removeItem("currentItem");
-      console.log(checkListName);
-      console.log(localStorage.setItem("currentItem", checkListName));
       localStorage.setItem("currentItem", checkListName);
 
       //getElementsByClassName only shows a list of the matching elements, not the element itself
@@ -143,18 +170,28 @@ function newCheckListItem() {
 
 //function to delete check lists and its localStorage
 function deleteCheckList() {
-  let checkUl = document.getElementById("checkListUl");
   let query = document.querySelector(".currentList");
-  let listItem = query.innerText;
-  let index = checkListArray.indexOf(listItem);
-  let checkTitle = document.getElementById("checkListTitle");
-  //remove the item from checkListArray
-  checkListArray.splice(index, 1);
-  //Update the localStorage
-  localStorage.setItem("localArray", JSON.stringify(checkListArray));
-  localStorage.removeItem("currentItem");
-  //Remove the li child element from the ul element using the id checkListUl
-  checkUl.removeChild(query);
-  //if a checkList item is deleted, remove the innerText from title
-  checkTitle.innerText = "";
+  //Check to see if nothing is highlighted
+  if (query !== null) {
+    let checkUl = document.getElementById("checkListUl");
+    let listItem = query.innerText;
+    let index = checkListArray.indexOf(listItem);
+    let checkTitle = document.getElementById("checkListTitle");
+    //remove the item from checkListArray
+    checkListArray.splice(index, 1);
+    //Update the localStorage
+    localStorage.setItem("localArray", JSON.stringify(checkListArray));
+    localStorage.removeItem("currentItem");
+    //Remove the li child element from the ul element using the id checkListUl
+    checkUl.removeChild(query);
+    //if a checkList item is deleted, remove the innerText from title
+    checkTitle.innerText = "";
+    //remove contentEditable from #editList
+    let content = document.getElementById("editList");
+    content.setAttribute("contentEditable", "false");
+    content.classList.remove("editList-style");
+    content.innerHTML = "";
+  } else {
+    alert("There is nothing to delete");
+  }
 }
