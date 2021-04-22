@@ -15,17 +15,18 @@ body {
 .grid {
   display: grid;
   grid-template: auto 1fr auto / minmax(150px, 20%) 1fr 20%;
-  grid-column-gap: 5px;
   height: 100vh;
 }
+
+/* HEADER */
 header {
   grid-column: 1 / 4;
   display: grid;
-  margin: 5px;
+  margin: 5px 10px;
   grid-template-columns: repeat(5, 1fr);
   place-items: center;
   background-color: silver;
-  box-shadow: 5px 10px 18px black;
+  border: 2px solid black;
 }
 .site-title {
   grid-column: 1 / 2;
@@ -35,6 +36,7 @@ header {
   grid-column: 1 / 2;
   margin: 0;
 }
+
 /* ADDING THE CHECKLIST BUTTON + ITEM */
 .newBtn {
   grid-column: 5 / 6;
@@ -84,15 +86,13 @@ header {
   text-align: center;
   display: grid;
   grid-template-rows: auto 1fr 50px;
+  border: 2px solid black;
   box-shadow: 5px 10px 18px black;
   border-bottom-left-radius: 10px;
 }
 .left-sidebar-title {
   grid-row: 1 / 1;
   padding: 0 2rem 0 2rem;
-  box-shadow: 5px 10px 18px black;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   border-bottom: 2px solid black;
 }
 #checkListUl {
@@ -127,7 +127,7 @@ header {
   grid-row: 3 / 3;
   display: flex;
   place-items: center;
-  box-shadow: 10px 5px 18px black;
+  border-top: 2px solid black;
   border-bottom-left-radius: 10px;
 }
 /* .left-sidebar-trash {
@@ -137,7 +137,9 @@ header {
 /* MAIN CONTENT - MIDDLE */
 #main {
   grid-column: 2 / 3;
+  margin: 0 5px;
   background-color: silver;
+  border: 2px solid black;
   box-shadow: 5px 10px 18px black;
 }
 #checkListTitle {
@@ -161,14 +163,7 @@ header {
   display: grid;
   grid-template-rows: auto 1fr 50px;
   box-shadow: 5px 10px 18px black;
-  border-bottom-right-radius: 10px;
-}
-.right-sidebar-title {
-  grid-row: 1 / 1;
-  padding: 0 2rem 0 2rem;
-  text-align: center;
-  box-shadow: 5px 10px 18px black;
-  border-bottom-left-radius: 10px;
+  border: 2px solid black;
   border-bottom-right-radius: 10px;
 }
 .right-sidebar-title {
