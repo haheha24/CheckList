@@ -102,7 +102,10 @@ header {
   padding: 5px 2px 5px 2px;
   display: block;
 }
-.currentList,
+.currentList {
+  background-color: hsla(0, 0%, 85%);
+  cursor: pointer;
+}
 .checkLi:hover {
   background-color: hsl(0, 0%, 100%);
   cursor: pointer;
