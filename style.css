@@ -178,6 +178,7 @@ header {
   border-bottom: 2px solid black;
 }
 
+/* FOOTER */
 footer {
   grid-column: 1 / 4;
   grid-row: 5 / 6;
