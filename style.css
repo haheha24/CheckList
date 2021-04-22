@@ -137,19 +137,24 @@ header {
 /* MAIN CONTENT - MIDDLE */
 #main {
   grid-column: 2 / 3;
+  display: grid;
+  grid-template-rows: 59px auto;
   margin: 0 5px;
   background-color: silver;
   border: 2px solid black;
   box-shadow: 5px 10px 18px black;
 }
 #checkListTitle {
+  grid-row: 1 / 2;
   text-align: center;
 }
 #editList {
-  margin: 0 20px 20px 20px;
+  grid-row: 2 / 3;
+}
+.editList-style {
+  margin: 0px 20px 20px 20px;
   border: 2px solid black;
   height: 500px;
-  overflow-y: auto;
   background-color: hsla(0, 0%, 60%);
   line-height: 1.1em;
   padding: 5px;
