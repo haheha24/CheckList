@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
 
     //Apply the highlight to the recent stored active item and call active()
     let oldStoredCurrent = localStorage.getItem("currentItem");
-    let newCurrentItem = document.getElementsByClassName("checkLi");
-    let itemIndex = checkListArray.indexOf(oldStoredCurrent);
-    newCurrentItem[itemIndex].classList.add("currentList");
+    if (oldStoredCurrent !== null) {
+      let newCurrentItem = document.getElementsByClassName("checkLi");
+      let itemIndex = checkListArray.indexOf(oldStoredCurrent);
+      newCurrentItem[itemIndex].classList.add("currentList");
+    }
 
     //set the title in #main
     let title = document.getElementById("checkListTitle");
@@ -52,12 +54,13 @@ function active() {
   //Dynamically change the #main title to whatever is highlighted with the currentList class
   function dynamicTitle() {
     for (i = 0; i < checkListArray.length; i++) {
-    let checkCurrent = document.getElementsByClassName("checkLi")[i];
-    checkCurrent.addEventListener("click", function () {
-      let listItem = document.querySelector(".currentList").innerText;
-      let title = document.getElementById("checkListTitle");
-      title.innerText = listItem;
-    })};
+      let checkCurrent = document.getElementsByClassName("checkLi")[i];
+      checkCurrent.addEventListener("click", function () {
+        let listItem = document.querySelector(".currentList").innerText;
+        let title = document.getElementById("checkListTitle");
+        title.innerText = listItem;
+      });
+    }
   }
   //activate the dynamic function
   dynamicTitle();
@@ -109,6 +112,10 @@ function newCheckListItem() {
       for (let i = 0; i < checkHighlight.length; i++) {
         checkHighlight[i].classList.remove("currentList");
       }
+      localStorage.removeItem("currentItem");
+      console.log(checkListName);
+      console.log(localStorage.setItem("currentItem", checkListName));
+      localStorage.setItem("currentItem", checkListName);
 
       //getElementsByClassName only shows a list of the matching elements, not the element itself
       //We use [] to specify which of the matching elements to work on
@@ -116,6 +123,7 @@ function newCheckListItem() {
       checkHighlight[checkLength].classList.add("currentList");
     } else {
       checkLi.classList.add("currentList");
+      localStorage.setItem("currentItem", checkListName);
     }
 
     //clear the contents of the checkListTxtBox and hide it again
@@ -144,6 +152,7 @@ function deleteCheckList() {
   checkListArray.splice(index, 1);
   //Update the localStorage
   localStorage.setItem("localArray", JSON.stringify(checkListArray));
+  localStorage.removeItem("currentItem");
   //Remove the li child element from the ul element using the id checkListUl
   checkUl.removeChild(query);
   //if a checkList item is deleted, remove the innerText from title
