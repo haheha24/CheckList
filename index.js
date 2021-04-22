@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
       checkLi += '<li class="checkLi">' + checklist + "</li>";
     });
     checkUl.innerHTML = checkLi;
+
+    //activate the highlight function
     active();
   } else if (localStorage.getItem("localArray") == null) {
     localStorage.setItem("localArray", checkListArray);
@@ -33,6 +35,18 @@ function active() {
       this.className += " currentList";
     });
   }
+
+  //Dynamically change the #main title to whatever is highlighted with the currentList class
+  function dynamicTitle() {
+    let checkCurrent = document.getElementById("checkListUl").getElementsByClassName("currentList")[0];
+      checkCurrent.addEventListener("click", function () {
+        let listItem = document.querySelector(".currentList").innerText;
+        let title = document.getElementById("checkListTitle");
+        title.innerText = listItem;
+      });
+  }
+  //activate the dynamic function
+  dynamicTitle();
 }
 
 // New Checklist Button
@@ -55,6 +69,7 @@ function newCheckListItem() {
   //DOM requirements
   let checkUl = document.getElementById("checkListUl");
   let checkLi = document.createElement("li");
+  let checkTitle = document.getElementById("checkListTitle");
 
   //begin the actual function
   if (conditionalOne) {
@@ -65,11 +80,12 @@ function newCheckListItem() {
     window.alert(
       "There is already a list with that name. Please choose another."
     );
-  } /* else if (document.querySelector(".showGrid")) {} */ else {
+  } else {
     checkListArray.push(checkListName);
     checkUl.appendChild(checkLi);
     checkLi.classList.add("checkLi");
     checkLi.innerText = checkListName;
+    checkTitle.innerText = checkListName;
 
     //"show" the currently highlighted checkList
     if (checkListArray.length > 1) {
@@ -107,11 +123,15 @@ function newCheckListItem() {
 function deleteCheckList() {
   let checkUl = document.getElementById("checkListUl");
   let query = document.querySelector(".currentList");
-  let index = checkListArray.indexOf(query.innerText);
+  let listItem = query.innerText;
+  let index = checkListArray.indexOf(listItem);
+  let checkTitle = document.getElementById("checkListTitle");
   //remove the item from checkListArray
   checkListArray.splice(index, 1);
   //Update the localStorage
   localStorage.setItem("localArray", JSON.stringify(checkListArray));
   //Remove the li child element from the ul element using the id checkListUl
   checkUl.removeChild(query);
+  //if a checkList item is deleted, remove the innerText from title
+  checkTitle.innerText = "";
 }
