@@ -76,7 +76,6 @@ function newCheckListItem() {
       let checkListId = document.getElementById("checkListUl");
       let checkHighlight = checkListId.getElementsByClassName("checkLi");
       let checkLength = checkListArray.length - 1;
-      console.log(checkListArray.length - 1);
       for (let i = 0; i < checkHighlight.length; i++) {
         checkHighlight[i].classList.remove("currentList");
       }
@@ -106,7 +105,13 @@ function newCheckListItem() {
 
 //function to delete check lists and its localStorage
 function deleteCheckList() {
+  let checkUl = document.getElementById("checkListUl");
   let query = document.querySelector(".currentList");
-  if (query) {
-  }
+  let index = checkListArray.indexOf(query.innerText);
+  //remove the item from checkListArray
+  checkListArray.splice(index, 1);
+  //Update the localStorage
+  localStorage.setItem("localArray", JSON.stringify(checkListArray));
+  //Remove the li child element from the ul element using the id checkListUl
+  checkUl.removeChild(query);
 }
