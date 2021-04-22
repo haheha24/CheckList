@@ -111,10 +111,13 @@ header {
   display: block;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .currentList {
   background-color: hsla(0, 0%, 85%);
   cursor: pointer;
 }
+=======
+>>>>>>> 76be2c3c751468fabcb66cf7e5744bd6d133ece8
 =======
 >>>>>>> 76be2c3c751468fabcb66cf7e5744bd6d133ece8
 .checkLi:hover {
