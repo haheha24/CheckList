@@ -15,7 +15,17 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
     });
     checkUl.innerHTML = checkLi;
 
-    //activate the highlight function
+    //Apply the highlight to the recent stored active item and call active()
+    let oldStoredCurrent = localStorage.getItem("currentItem");
+    let newCurrentItem = document.getElementsByClassName("checkLi");
+    let itemIndex = checkListArray.indexOf(oldStoredCurrent);
+    newCurrentItem[itemIndex].classList.add("currentList");
+
+    //set the title in #main
+    let title = document.getElementById("checkListTitle");
+    title.innerText = oldStoredCurrent;
+
+    //Call active() function and the nested dynamicTitle() function
     active();
   } else if (localStorage.getItem("localArray") == null) {
     localStorage.setItem("localArray", checkListArray);
@@ -33,17 +43,21 @@ function active() {
         current[0].className = current[0].className.replace(" currentList", "");
       }
       this.className += " currentList";
+      let newStoredCurrent = current[0].innerText;
+
+      //store newStoredCurrent to localStorage key "currentItem"
+      localStorage.setItem("currentItem", newStoredCurrent);
     });
   }
-
   //Dynamically change the #main title to whatever is highlighted with the currentList class
   function dynamicTitle() {
-    let checkCurrent = document.getElementById("checkListUl").getElementsByClassName("currentList")[0];
-      checkCurrent.addEventListener("click", function () {
-        let listItem = document.querySelector(".currentList").innerText;
-        let title = document.getElementById("checkListTitle");
-        title.innerText = listItem;
-      });
+    for (i = 0; i < checkListArray.length; i++) {
+    let checkCurrent = document.getElementsByClassName("checkLi")[i];
+    checkCurrent.addEventListener("click", function () {
+      let listItem = document.querySelector(".currentList").innerText;
+      let title = document.getElementById("checkListTitle");
+      title.innerText = listItem;
+    })};
   }
   //activate the dynamic function
   dynamicTitle();
