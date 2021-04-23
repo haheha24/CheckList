@@ -21,25 +21,23 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
       let newCurrentItem = document.getElementsByClassName("checkLi");
       let itemIndex = checkListArray.indexOf(oldStoredCurrent);
       newCurrentItem[itemIndex].classList.add("currentList");
+
+      //Apply contentEditable and editList-style class to #editList element *
+      let query = JSON.stringify(
+        document.querySelector(".currentList").innerText
+      );
+      let oldStoredContent = localStorage.getItem(JSON.parse(query));
+      let content = document.getElementById("editList");
+      content.setAttribute("contentEditable", "true");
+      content.classList.add("editList-style");
+      if (oldStoredContent !== null) {
+        content.innerText = oldStoredContent;
+      }
     }
 
     //set the title in #main
     let title = document.getElementById("checkListTitle");
     title.innerText = oldStoredCurrent;
-
-    //Apply contentEditable and editList-style class to #editList element
-    let oldStoredContent = localStorage.getItem("content");
-    if (oldStoredContent !== null) {
-
-      /* must figure out the saved content and only show the relevent content with the right item.
-      must create a localStorage key called "content".
-      must create a save function that will save the content of the relevant li item and apply it to the "content" key as a value */
-
-      let content = document.getElementById("editList");
-      content.setAttribute("contentEditable", "true");
-      content.classList.add("editList-style");
-    }
-    
 
     //Call active() function and the nested dynamicTitle() function
     active();
@@ -47,6 +45,15 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
     localStorage.setItem("localArray", checkListArray);
   }
 });
+
+/* //If there are no check Items, hide the save button
+document.addEventListener("DOMContentLoaded", function hideSave() {
+  if (document.querySelector(".currentList") == null) {
+    document.getElementById("save-btn").style.display = "none";
+  } else {
+    document.getElementById("save-btn").style.display = "inline-block";
+  }
+}); */
 
 //Call active() function to highlight the currently clicked list item and make the content editable by the user
 function active() {
@@ -60,10 +67,15 @@ function active() {
         current[0].className = current[0].className.replace(" currentList", "");
         content.setAttribute("contentEditable", "false");
         content.classList.remove("editList-style");
+        content.innerText = "";
       }
       this.className += " currentList";
       content.setAttribute("contentEditable", "true");
       content.classList.add("editList-style");
+
+      //load any saved content related to the relevent checkLi item from localStorage
+      let oldStoredContent = localStorage.getItem(this.innerText);
+      content.innerHTML = oldStoredContent;
 
       //store newStoredCurrent to localStorage key "currentItem"
       let newStoredCurrent = current[0].innerText;
@@ -83,13 +95,6 @@ function active() {
   }
   //activate the dynamic function
   dynamicTitle();
-
-  /*   //Dynamically change #editList with contentEditable as active() changes .currentList from li items
-  function contentEdit() {
-    let edit = document.getElementById("editList");
-    edit.addEventListener("");
-  }
-  contentEdit(); */
 }
 
 // New Checklist Button
@@ -132,6 +137,8 @@ function newCheckListItem() {
     checkTitle.innerText = checkListName;
     checkEdit.classList.add("editList-style");
     checkEdit.setAttribute("contentEditable", "true");
+    checkEdit.innerText = "";
+    //make checkEdit focused/clicked to automatically start typing;
 
     //"show" the currently highlighted checkList
     if (checkListArray.length > 1) {
@@ -146,7 +153,7 @@ function newCheckListItem() {
 
       //getElementsByClassName only shows a list of the matching elements, not the element itself
       //We use [] to specify which of the matching elements to work on
-      //.length begins from 1, so -1 from checkListArray will match the integer for checkHighLight array.
+      //.length begins from 1, so -1 from checkListArray will match the integer for checkHighLight element array.
       checkHighlight[checkLength].classList.add("currentList");
     } else {
       checkLi.classList.add("currentList");
@@ -168,22 +175,38 @@ function newCheckListItem() {
   }
 }
 
+function saveContent() {
+  let saveEditList = document.getElementById("editList");
+  let content = saveEditList.innerText;
+  let item = document.querySelector(".currentList").innerText;
+  if (
+    (content !== null || content !== undefined) &&
+    (item !== null || item !== undefined)
+  ) {
+    localStorage.setItem(item, content);
+    alert("Saved!");
+  } else {
+    alert("Cannot save!");
+  }
+}
+
 //function to delete check lists and its localStorage
 function deleteCheckList() {
-  let query = document.querySelector(".currentList");
+  let item = document.querySelector(".currentList");
   //Check to see if nothing is highlighted
-  if (query !== null) {
+  if (item !== null) {
     let checkUl = document.getElementById("checkListUl");
-    let listItem = query.innerText;
-    let index = checkListArray.indexOf(listItem);
+    let listItem = item.innerText;
     let checkTitle = document.getElementById("checkListTitle");
     //remove the item from checkListArray
+    let index = checkListArray.indexOf(listItem);
     checkListArray.splice(index, 1);
     //Update the localStorage
     localStorage.setItem("localArray", JSON.stringify(checkListArray));
     localStorage.removeItem("currentItem");
+    localStorage.removeItem(item.innerText);
     //Remove the li child element from the ul element using the id checkListUl
-    checkUl.removeChild(query);
+    checkUl.removeChild(item);
     //if a checkList item is deleted, remove the innerText from title
     checkTitle.innerText = "";
     //remove contentEditable from #editList

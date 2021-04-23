@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css" type="text/css">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <title>Check List</title>
@@ -19,18 +17,18 @@
     <h1 class="site-title">CheckList</h1>
     <h3 class="site-slogan">Time to get organised!</h4>
       <div class="newBtn">
-        <button onclick="newCheckList()">Create</button>
-        <button onclick="saveContent()">Save</button>
-        <button onclick="deleteCheckList()">Delete</button>
+        <button id="create-btn" class="btn" onclick="newCheckList()">Create</button>
+        <button id="save-btn" class="btn" onclick="saveContent()">Save</button>
+        <button id="delete-btn" class="btn" onclick="deleteCheckList()">Delete</button>
       </div>
   </header>
-  <section id="newCheckListBox" class="newChecklist">
+  <div id="newCheckListBox" class="newChecklist">
     <div class="showGrid-Input">
       <label class="boxContainer">Enter the name of your new CheckList:</label>
       <input id="checkListTxtBoxID" class="checkListTxtBox" type="text" placeholder="Please enter a name">
-      <button onclick="newCheckListItem()" class="checkListbtn"><i class="fas fa-plus-circle fa-2x"></i></button>
+      <button onclick="newCheckListItem()" class="checkListbtn">Create it!</button>
     </div>
-  </section>
+  </div>
   <div class="left-sidebar">
     <div class="left-sidebar-title">
       <h3>Check List Panel</h3>

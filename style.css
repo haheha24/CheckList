@@ -72,10 +72,12 @@ header {
   padding: 4px;
   height: 1.5em;
 }
-.checkListbtn {
-  align-self: baseline;
-  margin-top: 17.5px;
-  margin-right: 60px;
+.btn {
+  font-weight: 700;
+  padding: 5px;
+}
+.btn:hover {
+  box-shadow: 10px black;
 }
 
 /* LEFT SIDE BAR */
@@ -111,16 +113,11 @@ header {
   display: block;
 }
 .currentList {
-  background-color: hsla(0, 0%, 85%);
+  background-color: hsla(0, 0%, 92.5%);
   cursor: pointer;
 }
 .checkLi:hover {
-  background-color: hsl(0, 0%, 85%);
-  cursor: pointer;
-}
-.currentList,
-.currentList:hover {
-  background-color: hsl(0, 0%, 92.5%);
+  background-color: hsl(0, 0%, 100%);
   cursor: pointer;
 }
 .left-sidebar-btmPanel {
