@@ -47,40 +47,49 @@ header {
 
 .newChecklist {
   display: none;
-  z-index: 100;
+  z-index: 1;
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  min-width: 55%;
+  min-height: 100px;
   border: 1px solid;
   border-radius: 25px;
   background-color: silver;
-  box-shadow: 5px 10px 18px black;
 }
-.showGrid {
-  display: grid;
-  grid-template-rows: 1fr;
-  padding: 40px;
+.newChecklist:hover {
+  box-shadow: 0 0 100px rgb(255, 255, 255);
 }
-.showGrid-Input {
-  /* improve flex layout */
-  grid-row: 1 / 1;
+#boxFlex {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
+/* .opacity-cover {
+  background-color: hsl(0, 100%, 50);
+  z-index: 2;
+} */
 .checkListTxtBox {
-  width: 75%;
-  padding: 4px;
-  height: 1.5em;
+  min-width: 75%;
+  padding: 3px 0 3px 5px;
+  border-radius: 10px;
+}
+.checkListTxtBox:hover, .checkListTxtBox:focus {
+  box-shadow: 0 0 3px rgb(0, 0, 0);
+}
+.checkListTxtBox:focus-visible {
+  outline: none;
 }
 .btn {
   font-weight: 700;
   padding: 5px;
+  border-radius: 10px;
+  border: 2px solid black;
 }
-.btn:hover {
-  box-shadow: 10px black;
+.btn:hover, .btn:focus {
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 0 0 5px rgb(0, 0, 0);
 }
 
 /* LEFT SIDE BAR */
@@ -265,5 +274,13 @@ footer {
   }
   footer {
     grid-column: 1 / 5;
+  }
+}
+@media only screen and (max-width: 340px) {
+  .newChecklist {
+    min-height: 130px;
+  }
+  .checkListTxtBox {
+    margin-bottom: 10px;
   }
 }

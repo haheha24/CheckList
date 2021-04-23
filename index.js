@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function localStorageList() {
     title.innerText = oldStoredCurrent;
 
     //Call active() function and the nested dynamicTitle() function
+    //active() must be called here in order to begin the highlight ("currentList").
+    //"currentList" is the basis of most of the localStorage.
     active();
   } else if (localStorage.getItem("localArray") == null) {
     localStorage.setItem("localArray", checkListArray);
@@ -93,16 +95,18 @@ function active() {
       });
     }
   }
-  //activate the dynamic function
+  //activate the dynamicTitle function
   dynamicTitle();
 }
 
 // New Checklist Button
 function newCheckList() {
   let newCheckListBox = document.getElementById("newCheckListBox");
+  /* let cover = document.getElementById("boxFlex"); */
   let checkText = document.getElementById("checkListTxtBoxID");
   checkText.value = "";
-  newCheckListBox.classList.toggle("showGrid");
+  newCheckListBox.classList.toggle("show");
+  /* cover.classList.toggle("opacity-cover"); */
 }
 
 //Function to add new check lists
@@ -170,7 +174,13 @@ function newCheckListItem() {
       let newStoredArray = JSON.stringify(checkListArray);
       localStorage.setItem("localArray", newStoredArray);
     }
+    //toggle off the create box
+    newCheckList();
+    //Call active() function and the nested dynamicTitle() function
+    //active must be called here as well, because active() called during the DOMContentLoad event during a user's first time visit will not run properly.
+    //This makes sure that calling it here will begin the actual process, even after the user reloads the browser with saved localStorage.
     active();
+    //initialise localStorage "localArray";
     localS();
   }
 }
